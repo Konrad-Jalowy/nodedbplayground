@@ -58,4 +58,20 @@ app.get("/users/unwind3", async(req, res) => {
 
 });
 
+app.get("/users/unwind4", async(req, res) => {
+    let _users = await User.aggregate([
+        {
+            $unwind: "$hobbies"
+        },
+        {
+            $group: {
+                _id: "$hobbies",
+                count: {$sum: 1}
+            }
+        }
+    ]);
+    return res.json({"hobbies": _users});
+
+});
+
 module.exports = app;
