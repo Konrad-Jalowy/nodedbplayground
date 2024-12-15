@@ -89,7 +89,8 @@ app.get("/users/stats", async(req, res) => {
                 maxAge: {$max: "$age"},
                 avgCash: {$avg: "$cash"},
                 minCash: {$min: "$cash"},
-                maxCash: {$max: "$cash"}
+                maxCash: {$max: "$cash"},
+                allUsers: {$sum: 1}
             }
         }
     ]);
