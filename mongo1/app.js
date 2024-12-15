@@ -20,6 +20,21 @@ app.get("/users/withoutempty", async (req, res) => {
     return res.json({"users": _users});
 });
 
+app.get("/users/project1", async(req, res) => {
+    let _users = await User.aggregate([
+        {
+            $project: {
+                _id: 0,
+                createdAt: 0,
+                updatedAt: 0,
+                __v: 0
+            }
+        }
+    ]);
+    return res.json({"users": _users});
+
+});
+
 app.get("/users/unwind1", async(req, res) => {
     let _users = await User.aggregate([
         {
