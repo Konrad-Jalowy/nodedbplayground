@@ -15,4 +15,14 @@ app.get("/users/all", async (req, res) => {
     return res.json({"users": _users});
 });
 
+app.get("/users/unwind1", async(req, res) => {
+    let _users = await User.aggregate([
+        {
+            $unwind: "$hobbies"
+        }
+    ]);
+    return res.json({"users": _users});
+
+});
+
 module.exports = app;
