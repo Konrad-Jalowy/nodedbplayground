@@ -83,7 +83,7 @@ app.get("/users/stats", async(req, res) => {
         },
         {
             $group: {
-                _id: null,
+                _id: "Stats for all users",
                 avgAge: {$avg: "$age"},
                 minAge: {$min: "$age"},
                 maxAge: {$max: "$age"},
