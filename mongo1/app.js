@@ -25,4 +25,21 @@ app.get("/users/unwind1", async(req, res) => {
 
 });
 
+app.get("/users/unwind2", async(req, res) => {
+    let _users = await User.aggregate([
+        {
+            $unwind: "$hobbies"
+        },
+        {
+            $match: {
+                hobbies: {
+                    $in: ['Coding', "SQL"]
+                }
+            }
+        }
+    ]);
+    return res.json({"users": _users});
+
+});
+
 module.exports = app;
