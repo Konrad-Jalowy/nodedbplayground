@@ -35,6 +35,23 @@ app.get("/users/project1", async(req, res) => {
 
 });
 
+app.get("/users/project2", async(req, res) => {
+    let _users = await User.aggregate([
+        {
+            $project: {
+                fullname: {
+                    $concat: ["$firstName", " ", "$lastName"]
+                },
+                age: 1,
+                cash: 1,
+                hobbies: 1
+            }
+        }
+    ]);
+    return res.json({"users": _users});
+
+});
+
 app.get("/users/unwind1", async(req, res) => {
     let _users = await User.aggregate([
         {
