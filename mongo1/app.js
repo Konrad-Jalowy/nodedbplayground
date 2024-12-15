@@ -98,6 +98,27 @@ app.get("/users/stats", async(req, res) => {
 
 });
 
+app.get("/users/toupper", async(req, res) => {
+    let _users = await User.aggregate([
+        {  
+            $match:{
+                hobbies: {$exists: true, $size: 0}
+            }
+        },
+        {
+            $project: {
+                firstName: {$toUpper: "$firstName"},
+                lastName: {$toUpper: "$lastName"},
+                fullName: {$toUpper: {$concat: ["$firstName", " ", "$lastName"]}
+            }
+            }
+        }
+
+    ]);
+    return res.json({"users": _users});
+
+});
+
 app.get("/users/unwind1", async(req, res) => {
     let _users = await User.aggregate([
         {
