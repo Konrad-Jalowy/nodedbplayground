@@ -74,6 +74,29 @@ app.get("/users/project3", async(req, res) => {
 
 });
 
+app.get("/users/stats", async(req, res) => {
+    let _users = await User.aggregate([
+        {  
+        $match:{
+            _id: {$exists: true}
+        }
+        },
+        {
+            $group: {
+                _id: null,
+                avgAge: {$avg: "$age"},
+                minAge: {$min: "$age"},
+                maxAge: {$max: "$age"},
+                avgCash: {$avg: "$cash"},
+                minCash: {$min: "$cash"},
+                maxCash: {$max: "$cash"}
+            }
+        }
+    ]);
+    return res.json({"users": _users});
+
+});
+
 app.get("/users/unwind1", async(req, res) => {
     let _users = await User.aggregate([
         {
