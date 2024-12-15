@@ -1,0 +1,37 @@
+[
+    {
+      "firstName": "Jane",
+      "lastName": "Fakerman",
+      "age": 18,
+      "cash": 1000,
+      "hobbies": ["Chess", "Sports"]
+    },
+    {
+        "firstName": "John",
+        "lastName": "Boring",
+        "age": 30,
+        "cash": 5000
+      },
+      {
+        "firstName": "Jim",
+        "lastName": "Unreal",
+        "age": 40,
+        "cash": 6000,
+        "hobbies": ["SQL", "Coding"]
+      },
+      {
+        "firstName": "John",
+        "lastName": "Xml",
+        "age": 20,
+        "cash": 9000,
+        "hobbies": ["Video games", "Cooking"]
+      },
+      {
+        "firstName": "Janet",
+        "lastName": "Surreal",
+        "age": 44,
+        "cash": 9500,
+        "hobbies": ["Sports", "Video games", "Chess"]
+      }
+    
+  ]
