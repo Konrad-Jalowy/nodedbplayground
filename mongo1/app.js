@@ -52,6 +52,28 @@ app.get("/users/project2", async(req, res) => {
 
 });
 
+app.get("/users/project3", async(req, res) => {
+    let _users = await User.aggregate([
+        {  
+        $match:{
+            hobbies: {$exists: true, $ne: []}
+        }
+        },
+        {
+            $project: {
+                firstName: 1,
+                lastName: 1,
+                age: 1,
+                cash: 1,
+                hobbies: 1,
+                "hobbies_number": {$size: "$hobbies"}
+            }
+        }
+    ]);
+    return res.json({"users": _users});
+
+});
+
 app.get("/users/unwind1", async(req, res) => {
     let _users = await User.aggregate([
         {
