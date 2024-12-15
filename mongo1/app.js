@@ -107,9 +107,12 @@ app.get("/users/toupper", async(req, res) => {
         },
         {
             $project: {
+                age: 1,
+                cash: 1,
                 firstName: {$toUpper: "$firstName"},
                 lastName: {$toUpper: "$lastName"},
-                fullName: {$toUpper: {$concat: ["$firstName", " ", "$lastName"]}
+                fullName: {$toUpper: {$concat: ["$firstName", " ", "$lastName"]},
+                
             }
             }
         }
