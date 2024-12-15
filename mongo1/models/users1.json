@@ -1,0 +1,38 @@
+[
+    {
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "age": 18,
+      "cash": 1000,
+      "hobbies": ["Cooking", "Coding"]
+    },
+    {
+        "firstName": "John",
+        "lastName": "Doe",
+        "age": 30,
+        "cash": 5000,
+        "hobbies": ["Sports"]
+      },
+      {
+        "firstName": "Jim",
+        "lastName": "Seederman",
+        "age": 40,
+        "cash": 6000,
+        "hobbies": ["Chess", "Coding"]
+      },
+      {
+        "firstName": "John",
+        "lastName": "Jsonified",
+        "age": 20,
+        "cash": 9000,
+        "hobbies": ["Coding", "SQL"]
+      },
+      {
+        "firstName": "Janet",
+        "lastName": "Jsonlike",
+        "age": 44,
+        "cash": 9500,
+        "hobbies": ["Sports", "Video games", "Chess"]
+      }
+    
+  ]
