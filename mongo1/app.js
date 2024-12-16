@@ -57,6 +57,13 @@ app.get("/ppl/all", async (req, res) => {
     let _ppl = await Person.find({});
     return res.json({"People": _ppl});
 });
+
+app.get("/ppl/addrmakenull", async (req, res) => {
+    let _ppl = await Person.updateMany({address: {$exists: false}}, {address: null});
+    return res.json({"msg": "addr set to null if they dont have one"});
+});
+
+
 app.get("/rooms/all2", async (req, res) => {
     let _rooms = await Room.aggregate([
         {
