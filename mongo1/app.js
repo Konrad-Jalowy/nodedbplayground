@@ -4,14 +4,15 @@ const app = express();
 var ObjectId = require('mongoose').Types.ObjectId;
 const User = require("./models/userModel");
 const checkID = async (req, res, next, val) => {
-    let _paramId = req.params.id;
-    if(!ObjectId.isValid(_paramId)){
+
+    if(!ObjectId.isValid(val))
         return res.status(404).json({"err": "invalid id"});
-    }
-    let _user = await User.findOne({_id: req.params.id});
-    if (_user === null) {
+    
+    let _user = await User.findOne({_id: val});
+    
+    if (_user === null) 
       return res.status(404).json({"err": "invalid id"});
-    }
+    
     next();
   };
 
