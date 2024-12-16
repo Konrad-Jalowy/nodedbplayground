@@ -289,6 +289,12 @@ app.patch("/users/:id/newhobby", async (req, res) => {
     return res.json({"updated user with new hobby": _updatedUsr});
 });
 
+app.patch("/users/:id/addtoroom", async (req, res) => {
+    let _userID = req.params.id;
+    let _roomID = req.body.roomID;
+    return res.json({"userid" : _userID, "roomID": _roomID});
+});
+
 app.patch("/users/:id/removehobby", async (req, res) => {
     const _filter = {_id: req.params.id};
     const _update = { $pull: {hobbies: {$eq: req.body.removeHobby}}};
