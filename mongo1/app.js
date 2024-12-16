@@ -39,6 +39,9 @@ app.get("/rooms/all2", async (req, res) => {
             $match: {_id: {$exists: true, $ne: null}}
         },
         {
+            $addFields: { membersCount: {$size: "$members"}}
+        },
+        {
             $project: {__v: 0, createdAt: 0, updatedAt: 0}
         }
     ]);
