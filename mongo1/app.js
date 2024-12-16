@@ -9,7 +9,7 @@ const checkID = async (req, res, next, val) => {
         return res.status(404).json({"err": "invalid id"});
     
     let _user = await User.findOne({_id: val});
-    
+
     if (_user === null) 
       return res.status(404).json({"err": "invalid id"});
     
@@ -223,6 +223,12 @@ app.get("/users/unwind4", async(req, res) => {
 });
 
 app.get("/users/:id", async (req, res) => {
+    let _user = await User.findOne({_id: req.params.id});
+    return res.json({"id": _user});
+});
+
+
+app.patch("/users/:id", async (req, res) => {
     let _user = await User.findOne({_id: req.params.id});
     return res.json({"id": _user});
 });
