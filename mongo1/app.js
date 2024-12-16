@@ -33,6 +33,18 @@ app.get("/rooms/all", async (req, res) => {
     return res.json({"rooms": _rooms});
 });
 
+app.get("/rooms/all2", async (req, res) => {
+    let _rooms = await Room.aggregate([
+        {
+            $match: {_id: {$exists: true, $ne: null}}
+        },
+        {
+            $project: {__v: 0, createdAt: 0, updatedAt: 0}
+        }
+    ]);
+    return res.json({"rooms": _rooms});
+});
+
 app.get("/users/withoutempty", async (req, res) => {
     let _users = await User.find({"hobbies": {$exists: true, $ne: []}});
     return res.json({"users": _users});
