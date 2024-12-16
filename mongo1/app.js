@@ -330,7 +330,13 @@ app.get("/users/:id/withrooms2", async (req, res) => {
             $match: {_id: new ObjectId(req.params.id) }
         }
     ]);
+    let _rooms = await Room.aggregate([
+        {
+            $match: {members: {$in: [req.params.id]}}
+        }
+    ])
     console.log(_user);
+    console.log(_rooms);
     
     return res.json({"user": _user});
 });
