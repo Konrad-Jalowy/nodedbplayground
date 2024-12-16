@@ -264,7 +264,7 @@ app.get("/users/:id", async (req, res) => {
 
 app.get("/users/:id/withrooms", async (req, res) => {
     let _user = await User.findOne({_id: req.params.id});
-    let _rooms = await Room.find({members: {$in: [req.params.id]}}, {members: 0, __v: 0, createdAt: 0, updatedAt: 0} );
+    let _rooms = await Room.find({members: {$in: [req.params.id]}}, {members: 0, __v: 0, createdAt: 0, updatedAt: 0, _id:0} );
     return res.json({"user": _user, "rooms": _rooms});
 });
 
@@ -321,6 +321,18 @@ app.patch("/users/:id/removehobby", async (req, res) => {
 app.delete("/users/:id", async (req, res) => {
     await User.deleteOne({_id: req.params.id});
     return res.json({"msg": "such user is not in db anymore"});
+});
+
+app.get("/users/:id/withrooms2", async (req, res) => {
+    console.log(await User.findOne({_id: req.params.id}))
+    let _user = await User.aggregate([
+        {
+            $match: {_id: new ObjectId(req.params.id) }
+        }
+    ]);
+    console.log(_user);
+    
+    return res.json({"user": _user});
 });
 
 module.exports = app;
