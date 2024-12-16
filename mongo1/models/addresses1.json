@@ -1,0 +1,32 @@
+[
+    {
+      "street": "Coding Street",
+      "houseNumber": "1337",
+      "city": "Codingtown",
+      "zipCode": "022"
+    },
+    {
+        "street": "Coding Street",
+        "houseNumber": "1338",
+        "city": "Codingtown",
+        "zipCode": "022"
+    },
+    {
+        "street": "SQL Steet",
+        "houseNumber": "21",
+        "city": "Storagetown",
+        "zipCode": "023"
+      },
+      {
+        "street": "Mongo Steet",
+        "houseNumber": "29",
+        "city": "Storagetown",
+        "zipCode": "023"
+      },
+      {
+        "street": "Redis Avenue",
+        "houseNumber": "12",
+        "city": "Storagetown",
+        "zipCode": "023"
+      } 
+  ]
