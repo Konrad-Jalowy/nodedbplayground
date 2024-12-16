@@ -1,9 +1,13 @@
 const express = require('express');
 
 const app = express();
-
+var ObjectId = require('mongoose').Types.ObjectId;
 const User = require("./models/userModel");
 const checkID = async (req, res, next, val) => {
+    let _paramId = req.params.id;
+    if(!ObjectId.isValid(_paramId)){
+        return res.status(404).json({"err": "invalid id"});
+    }
     let _user = await User.findOne({_id: req.params.id});
     if (_user === null) {
       return res.status(404).json({"err": "invalid id"});
@@ -12,7 +16,7 @@ const checkID = async (req, res, next, val) => {
   };
 
 app.use(express.json());
-
+app.param('id', checkID);
 app.get('/', (req, res) => {
   res.json({"msg": "hello world"})
 });
