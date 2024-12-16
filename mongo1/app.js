@@ -291,7 +291,6 @@ app.patch("/users/:id/newhobby", async (req, res) => {
 
 app.patch("/users/:id/addtoroom", async (req, res) => {
     let _userID = new ObjectId(req.params.id);
-    let _user = await User.find({_id: _userID});
     let _roomID = new ObjectId(req.body.roomID);
     let _room = await Room.findOneAndUpdate({_id: _roomID}, {$addToSet: {members: _userID}});
     if(_room === null){
