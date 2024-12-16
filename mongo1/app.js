@@ -290,9 +290,16 @@ app.patch("/users/:id/newhobby", async (req, res) => {
 });
 
 app.patch("/users/:id/addtoroom", async (req, res) => {
-    let _userID = req.params.id;
-    let _roomID = req.body.roomID;
-    return res.json({"userid" : _userID, "roomID": _roomID});
+    let _userID = new ObjectId(req.params.id);
+    let _user = await User.find({_id: _userID});
+    let _roomID = new ObjectId(req.body.roomID);
+    let _room = await Room.findOneAndUpdate({_id: _roomID}, {$addToSet: {members: _userID}});
+    if(_room === null){
+        return res.json({"err": "room doesnt exist"});
+    }
+    console.log(_room);
+
+    return res.json({"msg" : "ok"});
 });
 
 app.patch("/users/:id/removehobby", async (req, res) => {
