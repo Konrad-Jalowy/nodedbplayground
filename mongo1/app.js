@@ -264,7 +264,7 @@ app.get("/users/:id", async (req, res) => {
 
 app.get("/users/:id/withrooms", async (req, res) => {
     let _user = await User.findOne({_id: req.params.id});
-    let _rooms = await Room.find({members: {$in: [req.params.id]}}, {members: 0} );
+    let _rooms = await Room.find({members: {$in: [req.params.id]}}, {members: 0, __v: 0, createdAt: 0, updatedAt: 0} );
     return res.json({"user": _user, "rooms": _rooms});
 });
 
