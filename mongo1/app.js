@@ -3,6 +3,13 @@ const express = require('express');
 const app = express();
 
 const User = require("./models/userModel");
+const checkID = async (req, res, next, val) => {
+    let _user = await User.findOne({_id: req.params.id});
+    if (_user === null) {
+      return res.status(404).json({"err": "invalid id"});
+    }
+    next();
+  };
 
 app.use(express.json());
 
