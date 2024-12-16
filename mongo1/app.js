@@ -259,4 +259,9 @@ app.patch("/users/:id/removehobby", async (req, res) => {
     return res.json({"updated user with removed hobby": _updatedUsr});
 });
 
+app.delete("/users/:id", async (req, res) => {
+    await User.deleteOne({_id: req.params.id});
+    return res.json({"msg": "such user is not in db anymore"});
+});
+
 module.exports = app;
