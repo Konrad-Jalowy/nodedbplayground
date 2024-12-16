@@ -17,8 +17,22 @@ const checkID = async (req, res, next, val) => {
     next();
   };
 
+  const checkRoomID = async (req, res, next, val) => {
+
+    if(!ObjectId.isValid(val))
+        return res.status(404).json({"err": "invalid id"});
+    
+    let _room = await Room.findOne({_id: val});
+
+    if (_room === null) 
+      return res.status(404).json({"err": "invalid id"});
+    
+    next();
+  };
+
 app.use(express.json());
 app.param('id', checkID);
+app.param('roomID', checkRoomID);
 app.get('/', (req, res) => {
   res.json({"msg": "hello world"})
 });
