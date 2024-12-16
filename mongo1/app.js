@@ -239,4 +239,14 @@ app.patch("/users/:id", async (req, res) => {
     return res.json({"updated user": _updatedUsr});
 });
 
+app.patch("/users/:id/newhobby", async (req, res) => {
+    const _filter = {_id: req.params.id};
+    const _update = { $addToSet: {hobbies: req.body.newHobby}};
+    if(Object.keys(_update).length > 0){
+        await User.updateOne(_filter, _update);
+    }
+    let _updatedUsr = await User.findOne(_filter);
+    return res.json({"updated user with new hobby": _updatedUsr});
+});
+
 module.exports = app;
