@@ -32,9 +32,23 @@ const checkID = async (req, res, next, val) => {
     next();
   };
 
+  const checkPersonID = async (req, res, next, val) => {
+
+    if(!ObjectId.isValid(val))
+        return res.status(404).json({"err": "invalid id"});
+    
+    let _person = await Person.findOne({_id: val});
+
+    if (_person === null) 
+      return res.status(404).json({"err": "invalid id"});
+    
+    next();
+  };
+
 app.use(express.json());
 app.param('id', checkID);
 app.param('roomID', checkRoomID);
+app.param('personID', checkPersonID);
 app.get('/', (req, res) => {
   res.json({"msg": "hello world"})
 });
