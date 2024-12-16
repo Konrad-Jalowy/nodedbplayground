@@ -4,6 +4,7 @@ const app = express();
 var ObjectId = require('mongoose').Types.ObjectId;
 const User = require("./models/userModel");
 const Room = require("./models/roomModel");
+const Address = require("./models/addressModel");
 const checkID = async (req, res, next, val) => {
 
     if(!ObjectId.isValid(val))
@@ -45,6 +46,11 @@ app.get("/users/all", async (req, res) => {
 app.get("/rooms/all", async (req, res) => {
     let _rooms = await Room.find({});
     return res.json({"rooms": _rooms});
+});
+
+app.get("/addr/all", async (req, res) => {
+    let _addrs = await Address.find({});
+    return res.json({"Addresses": _addrs});
 });
 
 app.get("/rooms/all2", async (req, res) => {
