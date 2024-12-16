@@ -229,8 +229,11 @@ app.get("/users/:id", async (req, res) => {
 
 
 app.patch("/users/:id", async (req, res) => {
-    let _user = await User.findOne({_id: req.params.id});
-    return res.json({"id": _user});
+    const _filter = {_id: req.params.id};
+    const _update = {...req.body};
+    let _user = await User.findOneAndUpdate(_filter, _update);
+    let _updatedUsr = await User.findOne(_filter);
+    return res.json({"updated user": _updatedUsr});
 });
 
 module.exports = app;
