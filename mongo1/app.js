@@ -262,6 +262,11 @@ app.get("/users/:id", async (req, res) => {
     return res.json({"id": _user});
 });
 
+app.get("/rooms/:roomID", async (req, res) => {
+    let _room = await Room.findOne({_id: req.params.roomID});
+    return res.json({"id": _room});
+});
+
 
 app.patch("/users/:id", async (req, res) => {
     const _filter = {_id: req.params.id};
