@@ -59,7 +59,7 @@ app.get("/ppl/all", async (req, res) => {
 });
 
 app.get("/ppl/addrmakenull", async (req, res) => {
-    let _ppl = await Person.updateMany({address: {$exists: false}}, {address: null});
+    await Person.updateMany({address: {$exists: false}}, {address: null});
     return res.json({"msg": "addr set to null if they dont have one"});
 });
 
