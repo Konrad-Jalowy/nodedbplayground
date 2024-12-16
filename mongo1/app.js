@@ -231,7 +231,9 @@ app.get("/users/:id", async (req, res) => {
 app.patch("/users/:id", async (req, res) => {
     const _filter = {_id: req.params.id};
     const _update = {...req.body};
-    let _user = await User.findOneAndUpdate(_filter, _update);
+    if(Object.keys(_update).length > 0){
+        await User.findOneAndUpdate(_filter, _update);
+    }
     let _updatedUsr = await User.findOne(_filter);
     return res.json({"updated user": _updatedUsr});
 });
