@@ -263,7 +263,7 @@ app.get("/users/:id", async (req, res) => {
 });
 
 app.get("/rooms/:roomID", async (req, res) => {
-    let _room = await Room.findOne({_id: req.params.roomID});
+    let _room = await Room.findOne({_id: req.params.roomID}).populate("members");
     return res.json({"id": _room});
 });
 
