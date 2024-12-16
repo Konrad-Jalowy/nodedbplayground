@@ -1,0 +1,16 @@
+[
+    {
+      "firstName": "Jane",
+      "lastName": "Deleteme",
+      "age": 18,
+      "cash": 1000,
+      "hobbies": ["Chess", "Sports"]
+    },
+    {
+        "firstName": "John",
+        "lastName": "Patchman",
+        "age": 30,
+        "cash": 15000,
+        "hobbies": ["Chess", "Sports", "SQL"]
+    }
+  ]
