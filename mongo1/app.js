@@ -328,19 +328,23 @@ app.delete("/users/:id", async (req, res) => {
 });
 
 app.get("/users/:id/withrooms2", async (req, res) => {
-    console.log(await User.findOne({_id: req.params.id}))
+    
     let _user = await User.aggregate([
         {
             $match: {_id: new ObjectId(req.params.id) }
         }
     ]);
-    let _rooms = await Room.aggregate([
-        {
-            $match: {members: {$in: [new ObjectId(req.params.id)]}}
-        }
-    ])
-    console.log(_user);
-    console.log(_rooms);
+    // let _rooms = await Room.aggregate([
+    //     {
+    //         $unwind: "$members"
+    //     },
+    //     {
+    //         $project: {_id: "$name"}
+    //     }
+    // ])
+    
+    // console.log(_rooms, "blabla");
+    //todo - find a way to join two tables like that... 
     
     return res.json({"user": _user});
 });
