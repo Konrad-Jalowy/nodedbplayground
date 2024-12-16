@@ -210,4 +210,9 @@ app.get("/users/unwind4", async(req, res) => {
 
 });
 
+app.get("/users/:id", async (req, res) => {
+    let _user = await User.findOne({_id: req.params.id});
+    return res.json({"id": _user});
+});
+
 module.exports = app;
