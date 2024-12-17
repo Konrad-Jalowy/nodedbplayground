@@ -323,6 +323,16 @@ app.get("/addr/:addrID", async (req, res) => {
     let _addr = await Address.findOne({_id: req.params.addrID});
     return res.json({"person": _addr});
 });
+
+app.get("/addr/:addrID/lookup", async (req, res) => {
+    let _addr = await Address.aggregate([
+        {
+            $match: {_id: new ObjectId(req.params.addrID) }
+        }
+    ]);
+    console.log(_addr)
+    return res.json({"person lookup": _addr});
+});
 app.get("/users/:id/withrooms", async (req, res) => {
     let _user = await User.findOne({_id: req.params.id});
     let _rooms = await Room.find({members: {$in: [req.params.id]}}, {members: 0, __v: 0, createdAt: 0, updatedAt: 0, _id:0} );
