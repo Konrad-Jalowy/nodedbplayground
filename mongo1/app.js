@@ -328,6 +328,14 @@ app.get("/addr/:addrID/lookup", async (req, res) => {
     let _addr = await Address.aggregate([
         {
             $match: {_id: new ObjectId(req.params.addrID) }
+        },
+        {
+            $lookup: {
+                from: 'people',
+                localField: '_id',
+                foreignField: "address",
+                as: "person_info"
+            }
         }
     ]);
     console.log(_addr)
