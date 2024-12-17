@@ -312,6 +312,13 @@ app.get("/ppl/:personID", async (req, res) => {
     let _person = await Person.findOne({_id: req.params.personID});
     return res.json({"person": _person});
 });
+app.patch("/ppl/:personID/addr", async (req, res) => {
+    let _personID = req.params.personID;
+    let _addrID =req.body.addrID;
+    await Person.updateOne({_id: _personID}, {address: _addrID});
+
+    return res.json({"msg" : "ok"});
+});
 app.get("/addr/:addrID", async (req, res) => {
     let _addr = await Address.findOne({_id: req.params.addrID});
     return res.json({"person": _addr});
