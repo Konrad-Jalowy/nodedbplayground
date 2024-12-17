@@ -449,7 +449,18 @@ app.get("/users/:id/withrooms2", async (req, res) => {
                 from: 'rooms',
                 localField: '_id',
                 foreignField: "members",
-                as: "rooms"
+                as: "rooms",
+                pipeline: [
+                    {
+                        $project: {
+                            __v: 0,
+                            members: 0,
+                            _id: 0,
+                            createdAt: 0,
+                            updatedAt: 0,
+                        }
+                    }
+                ]
                 
             }
         },
