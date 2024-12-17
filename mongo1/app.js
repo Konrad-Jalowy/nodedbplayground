@@ -486,4 +486,54 @@ app.get("/users/:id/withrooms2", async (req, res) => {
     return res.json({"user": _user});
 });
 
+
+app.get("/users/:id/withrooms3", async (req, res) => {
+    
+    let _user = await User.aggregate([
+        {
+            $match: {_id: new ObjectId(req.params.id) }
+        },
+        {
+            $lookup: {
+                from: 'rooms',
+                localField: '_id',
+                foreignField: "members",
+                as: "rooms",
+                pipeline: [
+                    {
+                        $project: {
+                            __v: 0,
+                            members: 0,
+                            _id: 0,
+                            createdAt: 0,
+                            updatedAt: 0,
+                        }
+                    }
+                ]
+                
+            }
+        },
+        {
+            $addFields: {
+                hobbiesCount: {$size: "$hobbies"},
+                roomsCount: {$size: "$rooms"}
+            }
+        },
+        {
+            $project: {
+                hobbies: 0,
+                createdAt: 0,
+                updatedAt: 0,
+                __v: 0,
+                rooms: 0
+            }
+        }
+    ]);
+    
+    //todo - i want array of names...
+  
+    
+    return res.json({"user": _user});
+});
+
 module.exports = app;
