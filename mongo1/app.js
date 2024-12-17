@@ -86,6 +86,18 @@ app.get("/ppl/all", async (req, res) => {
     return res.json({"People": _ppl});
 });
 
+app.get("/ppl/bucketauto", async (req, res) => {
+    let _ppl = await Person.aggregate([
+        {
+            $bucketAuto: {
+                groupBy: "$age",
+                buckets: 5
+            }
+        }
+    ]);
+    return res.json({"People bucketauto age": _ppl});
+});
+
 app.get("/ppl/addrmakenull", async (req, res) => {
     await Person.updateMany({address: {$exists: false}}, {address: null});
     return res.json({"msg": "addr set to null if they dont have one"});
@@ -312,6 +324,7 @@ app.get("/ppl/:personID", async (req, res) => {
     let _person = await Person.findOne({_id: req.params.personID});
     return res.json({"person": _person});
 });
+
 app.patch("/ppl/:personID/addr", async (req, res) => {
     let _personID = req.params.personID;
     let _addrID =req.body.addrID;
