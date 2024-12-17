@@ -454,8 +454,16 @@ app.get("/users/:id/withrooms2", async (req, res) => {
             }
         },
         {
+            $addFields: {
+                hobbiesCount: {$size: "$hobbies"}
+            }
+        },
+        {
             $project: {
-                hobbies: 0
+                hobbies: 0,
+                createdAt: 0,
+                updatedAt: 0,
+                __v: 0
             }
         }
     ]);
