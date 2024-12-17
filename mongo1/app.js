@@ -93,7 +93,7 @@ app.get("/ppl/bucketauto", async (req, res) => {
                 groupBy: "$age",
                 buckets: 5,
                 output: {
-                    names: {$push: "$firstName"}
+                    names: {$push: {$concat: ["$firstName", " ", "$lastName"]}}
                 }
             }
         }
