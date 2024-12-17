@@ -293,6 +293,12 @@ app.get("/users/:id", async (req, res) => {
     return res.json({"id": _user});
 });
 
+
+app.get("/ppl/:personID", async (req, res) => {
+    let _person = await Person.findOne({_id: req.params.personID});
+    return res.json({"person": _person});
+});
+
 app.get("/users/:id/withrooms", async (req, res) => {
     let _user = await User.findOne({_id: req.params.id});
     let _rooms = await Room.find({members: {$in: [req.params.id]}}, {members: 0, __v: 0, createdAt: 0, updatedAt: 0, _id:0} );
