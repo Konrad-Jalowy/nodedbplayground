@@ -453,6 +453,11 @@ app.get("/users/:id/withrooms2", async (req, res) => {
                 
             }
         },
+        {
+            $project: {
+                hobbies: 0
+            }
+        }
     ]);
     
     //todo - find a way to join two tables like that... 
