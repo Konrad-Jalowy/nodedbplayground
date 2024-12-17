@@ -336,6 +336,15 @@ app.get("/addr/:addrID/lookup", async (req, res) => {
                 foreignField: "address",
                 as: "person_info"
             }
+        },
+        {
+            $project: {
+                "person_info._id": 0,
+                "person_info.createdAt" : 0,
+                "person_info.updatedAt" : 0,
+                "person_info.address": 0,
+                "person_info.__v": 0
+            }
         }
     ]);
     console.log(_addr)
