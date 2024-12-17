@@ -29,7 +29,14 @@ const personSchema = new mongoose.Schema({
    }
 }, {timestamps: true}
 );
-
+personSchema.pre(/^find/, function(next) {
+    this.populate({
+      path: 'address',
+      select: '-__v'
+    });
+  
+    next();
+  });
 
 
 module.exports = mongoose.model('Person', personSchema);
