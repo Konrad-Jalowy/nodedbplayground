@@ -334,7 +334,12 @@ app.get("/addr/:addrID/lookup", async (req, res) => {
                 from: 'people',
                 localField: '_id',
                 foreignField: "address",
-                as: "person_info"
+                as: "person_info",
+                pipeline: [
+                    {
+                        $addFields: { hobbiesCount: {$size: "$hobbies"}}
+                    }
+                ]
             }
         },
         {
