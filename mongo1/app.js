@@ -443,19 +443,20 @@ app.get("/users/:id/withrooms2", async (req, res) => {
     let _user = await User.aggregate([
         {
             $match: {_id: new ObjectId(req.params.id) }
-        }
+        },
+        {
+            $lookup: {
+                from: 'rooms',
+                localField: '_id',
+                foreignField: "members",
+                as: "rooms"
+                
+            }
+        },
     ]);
-    // let _rooms = await Room.aggregate([
-    //     {
-    //         $unwind: "$members"
-    //     },
-    //     {
-    //         $project: {_id: "$name"}
-    //     }
-    // ])
     
-    // console.log(_rooms, "blabla");
     //todo - find a way to join two tables like that... 
+    //its done!
     
     return res.json({"user": _user});
 });
