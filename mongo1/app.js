@@ -455,7 +455,8 @@ app.get("/users/:id/withrooms2", async (req, res) => {
         },
         {
             $addFields: {
-                hobbiesCount: {$size: "$hobbies"}
+                hobbiesCount: {$size: "$hobbies"},
+                roomsCount: {$size: "$rooms"}
             }
         },
         {
