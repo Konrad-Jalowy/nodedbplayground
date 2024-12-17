@@ -488,6 +488,8 @@ app.get("/users/:id/withrooms2", async (req, res) => {
 
 
 app.get("/users/:id/withrooms3", async (req, res) => {
+
+    //TODO - FIND SOME WAY TO USE LOOKUP TO RETURN FLAT ARRAY...
     
     let _user = await User.aggregate([
         {
@@ -517,7 +519,15 @@ app.get("/users/:id/withrooms3", async (req, res) => {
             $addFields: {
                 hobbiesCount: {$size: "$hobbies"},
                 roomsCount: {$size: "$rooms"},
-                roomNames: "blabla"
+                roomNames: {
+                    $map: {
+                        input: "$rooms",
+                        as: "room",
+                        in: {
+                            $mergeObjects: {}
+                        }
+                    }
+                }
             }
         },
         {
